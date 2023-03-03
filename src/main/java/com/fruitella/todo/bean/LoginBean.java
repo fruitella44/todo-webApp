@@ -1,5 +1,6 @@
 package com.fruitella.todo.bean;
 
+import com.fruitella.todo.DAO.LoginDao;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,3 @@ public class LoginBean implements Serializable {
     private String password;
 
 }
-

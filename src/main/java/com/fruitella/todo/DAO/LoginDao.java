@@ -10,12 +10,6 @@ import java.util.List;
 
 public class LoginDao {
 
-//    private final SessionFactory sessionFactory;
-//
-//    public LoginDao(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
-
     public boolean validate(String name, String password) {
         Transaction transaction = null;
 
@@ -40,4 +34,3 @@ public class LoginDao {
         }
     }
 }
-

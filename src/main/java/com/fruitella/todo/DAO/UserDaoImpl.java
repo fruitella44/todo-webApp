@@ -64,5 +64,4 @@ public class UserDaoImpl implements UserDao {
             transaction.commit();
         }
     }
-
 }

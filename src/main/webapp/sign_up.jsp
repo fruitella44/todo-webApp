@@ -12,29 +12,30 @@
 <html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Register</title>
+    <title>Registration</title>
 </head>
 <body>
-<h1>Register</h1>
-<form action="register" method="post">
-    <%--@declare id="username"--%>
-    <%--@declare id="password"--%>
-    <%--@declare id="confirmpassword"--%>
-    <%--@declare id="email"--%>
+<h1>Create new account</h1>
+<form action="sign_up" method="post">
+
+        <%--@declare id="username"--%>
     <label for="username">Username:</label>
     <input type="text" name="username" required><br>
 
+        <%--@declare id="password"--%>
     <label for="password">Password:</label>
     <input type="password" name="password" required><br>
 
-    <label for="confirmPassword">Confirm Password:</label>
+        <%--@declare id="confirmpassword"--%>
+    <label for="confirmPassword">Confirm password:</label>
     <input type="password" name="confirmPassword" required><br>
 
+        <%--@declare id="email"--%>
      <label for="email">Email:</label>
      <input type="email" name="email" required><br>
 
     <button type="submit">Register</button>
 </form>
 </body>
-</html>
 
+</html>
