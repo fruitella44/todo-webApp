@@ -10,7 +10,7 @@
 
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
@@ -24,6 +24,10 @@
     <label for="password">Пароль:</label>
     <input type="password" id="password" name="password" required><br>
     <input type="submit" value="Login">
+
+    <div class="alert alert-login center" role="alert">
+        <p>${Notification}</p>
+    </div>
 </form>
 </body>
 </html>

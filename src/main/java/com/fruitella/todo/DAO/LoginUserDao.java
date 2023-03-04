@@ -1,28 +1,27 @@
 package com.fruitella.todo.DAO;
 
-import com.fruitella.todo.connection.TodoSessionFactory;
-import com.fruitella.todo.entity.User;
+import com.fruitella.todo.connection.TodoAppSessionFactory;
+import com.fruitella.todo.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class LoginDao {
+public class LoginUserDao {
 
     public boolean validate(String name, String password) {
         Transaction transaction = null;
 
-        try (Session session = TodoSessionFactory.getSessionFactory().openSession()) {
+        try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            Query<User> userQuery = session.createQuery("FROM User WHERE username = :NAME AND userPassword = :PASSWORD");
+            Query<Users> userQuery = session.createQuery("FROM Users WHERE username = :NAME AND userPassword = :PASSWORD");
             userQuery.setParameter("NAME", name);
             userQuery.setParameter("PASSWORD", password);
 
-            List<User> users = userQuery.list();
+            List<Users> users = userQuery.list();
             transaction.commit();
-
             return !users.isEmpty();
 
         } catch (Exception e) {

@@ -1,7 +1,7 @@
 package com.fruitella.todo.servlet;
 
-import com.fruitella.todo.DAO.LoginDao;
-import com.fruitella.todo.bean.LoginBean;
+import com.fruitella.todo.DAO.LoginUserDao;
+import com.fruitella.todo.bean.AuthorisationBean;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
 
-    private LoginDao loginDao;
+    private LoginUserDao loginDao;
 
     public void init() {
-        loginDao = new LoginDao();
+        loginDao = new LoginUserDao();
     }
 
 
@@ -26,14 +26,16 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        LoginBean loginBean = new LoginBean();
-        loginBean.setUsername(username);
-        loginBean.setPassword(password);
+        AuthorisationBean authorisationBean = new AuthorisationBean();
+        authorisationBean.setUsername(username);
+        authorisationBean.setPassword(password);
 
-        if (loginDao.validate(loginBean.getUsername(), loginBean.getPassword())) {
-            response.sendRedirect("valid.jsp");
+        //Check validation of login and pass
+        if (loginDao.validate(authorisationBean.getUsername(), authorisationBean.getPassword())) {
+            response.sendRedirect("todo_form.jsp");
         } else {
-            response.sendRedirect("invalid.jsp");
+            request.setAttribute("Notification", "Invalid login or password");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 }

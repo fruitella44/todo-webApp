@@ -1,7 +1,7 @@
 package com.fruitella.todo.servlet;
 
-import com.fruitella.todo.DAO.UserDaoImpl;
-import com.fruitella.todo.entity.User;
+import com.fruitella.todo.DAO.UserDaoImplement;
+import com.fruitella.todo.entity.Users;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegistrationServlet", value = "/sign_up")
 public class RegistrationServlet extends HttpServlet {
 
-    private UserDaoImpl userDao;
+    private UserDaoImplement userDao;
 
     @Override
     public void init() throws ServletException {
-        super.init();
-        userDao = new UserDaoImpl();
+        userDao = new UserDaoImplement();
     }
 
     @Override
@@ -27,7 +26,7 @@ public class RegistrationServlet extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
 
-        User user = User.builder()
+        Users user = Users.builder()
                 .username(username)
                 .userPassword(password)
                 .email(email)
@@ -36,6 +35,5 @@ public class RegistrationServlet extends HttpServlet {
         userDao.addUser(user);
         response.sendRedirect("login.jsp");
     }
-
 
 }
