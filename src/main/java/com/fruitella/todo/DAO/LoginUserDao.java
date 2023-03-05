@@ -2,13 +2,14 @@ package com.fruitella.todo.DAO;
 
 import com.fruitella.todo.connection.TodoAppSessionFactory;
 import com.fruitella.todo.entity.Users;
+import com.fruitella.todo.hasher.PasswordHasher;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
-import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginUserDao {
+
 
     public boolean validate(String name, String password) {
         Transaction transaction = null;
@@ -16,13 +17,18 @@ public class LoginUserDao {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            Query<Users> userQuery = session.createQuery("FROM Users WHERE username = :NAME AND userPassword = :PASSWORD");
+            Query<Users> userQuery = session.createQuery("FROM Users WHERE username = :NAME");
             userQuery.setParameter("NAME", name);
-            userQuery.setParameter("PASSWORD", password);
 
-            List<Users> users = userQuery.list();
+            Users user = userQuery.getSingleResult();
             transaction.commit();
-            return !users.isEmpty();
+
+            if (user != null && PasswordHasher.checkPassword(password, user.getUserPassword())) {
+                return true;
+            } else {
+                return false;
+            }
+
 
         } catch (Exception e) {
             if (transaction != null) {
@@ -32,4 +38,5 @@ public class LoginUserDao {
             return false;
         }
     }
+
 }

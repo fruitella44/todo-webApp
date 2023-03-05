@@ -1,7 +1,6 @@
 package com.fruitella.todo.entity;
 
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet("/TodoServlet")
@@ -41,31 +42,41 @@ public class TodoServlet extends HttpServlet {
 
     private void listTodo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Todo> todoList = todoDao.getAllTodos();
-        request.setAttribute("todo_list", todoList);
+        request.setAttribute("todoList", todoList);
         request.getRequestDispatcher("todo_list.jsp").forward(request, response);
     }
 
-    // Show form
+
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("todo_form.jsp").forward(request, response);
     }
 
     private void insertTodo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Todo todo = new Todo();
-        todo.setTitle(request.getParameter("title"));
-        todo.setDescription(request.getParameter("description"));
-        todo.setIsDone(Boolean.parseBoolean(request.getParameter("isDone")));
-        todo.setCreatedDate(LocalDateTime.now());
-        todo.setExpiredDate(LocalDateTime.parse(request.getParameter("expiredDate")));
-        todo.setUsername(request.getParameter("username"));
-        todoDao.addTodo(todo);
+        String username = request.getParameter("username");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
 
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        LocalDateTime createdDate = LocalDateTime.now();
+        LocalDateTime expiredDate = LocalDateTime.parse(request.getParameter("expiredDate"), formatter);
+
+        Todo todo = Todo.builder()
+                .username(username)
+                .title(title)
+                .description(description)
+                .isDone(isDone)
+                .createdDate(createdDate)
+                .expiredDate(expiredDate)
+                .build();
+
+        todoDao.addTodo(todo);
         response.sendRedirect("list");
     }
 
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        long id = Long.parseLong(request.getParameter("id"));
         Todo existingTodo = todoDao.getTodoById(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("todo_form.jsp");
         request.setAttribute("todo", existingTodo);
@@ -73,23 +84,30 @@ public class TodoServlet extends HttpServlet {
     }
 
     private void updateTodo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Todo todo = new Todo();
-        todo.setId((long) Integer.parseInt(request.getParameter("id")));
-        todo.setTitle(request.getParameter("title"));
-        todo.setDescription(request.getParameter("description"));
-        todo.setIsDone(Boolean.parseBoolean(request.getParameter("isDone")));
-        todo.setCreatedDate(LocalDateTime.parse(request.getParameter("createdDate")));
-        todo.setExpiredDate(LocalDateTime.parse(request.getParameter("expiredDate")));
-        todo.setUsername(request.getParameter("username"));
+        String username = request.getParameter("username");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
+        LocalDateTime createdDate = LocalDateTime.now().parse(request.getParameter("createdDate"));
+        LocalDateTime expiredDate = LocalDateTime.parse(request.getParameter("expiredDate"));
+
+        Todo todo = Todo.builder()
+                .username(username)
+                .title(title)
+                .description(description)
+                .isDone(isDone)
+                .createdDate(createdDate)
+                .expiredDate(expiredDate)
+                .build();
 
         todoDao.updateTodo(todo);
         response.sendRedirect("list");
     }
 
     private void deleteTodo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        long id = Long.parseLong(request.getParameter("id"));
         todoDao.deleteTodoById(id);
-        response.sendRedirect("todo_list.jsp");
+        response.sendRedirect("list");
     }
 
 }

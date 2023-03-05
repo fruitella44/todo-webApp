@@ -2,6 +2,7 @@ package com.fruitella.todo.servlet;
 
 import com.fruitella.todo.DAO.UserDaoImplement;
 import com.fruitella.todo.entity.Users;
+import com.fruitella.todo.hasher.PasswordHasher;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -28,7 +29,7 @@ public class RegistrationServlet extends HttpServlet {
 
         Users user = Users.builder()
                 .username(username)
-                .userPassword(password)
+                .userPassword(PasswordHasher.hashPassword(password))
                 .email(email)
                 .build();
 

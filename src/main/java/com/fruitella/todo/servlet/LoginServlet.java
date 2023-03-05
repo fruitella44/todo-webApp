@@ -2,6 +2,8 @@ package com.fruitella.todo.servlet;
 
 import com.fruitella.todo.DAO.LoginUserDao;
 import com.fruitella.todo.bean.AuthorisationBean;
+import com.fruitella.todo.hasher.PasswordHasher;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -22,16 +24,16 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        AuthorisationBean authorisationBean = new AuthorisationBean();
-        authorisationBean.setUsername(username);
-        authorisationBean.setPassword(password);
+        AuthorisationBean userBean = new AuthorisationBean();
+        userBean.setUsername(username);
+        userBean.setPassword(password);
 
         //Check validation of login and pass
-        if (loginDao.validate(authorisationBean.getUsername(), authorisationBean.getPassword())) {
+//        String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        if (loginDao.validate(userBean.getUsername(), userBean.getPassword())) {
             response.sendRedirect("todo_form.jsp");
         } else {
             request.setAttribute("Notification", "Invalid login or password");
