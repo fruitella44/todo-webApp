@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "RegistrationServlet", value = "/sign_up")
 public class RegistrationServlet extends HttpServlet {
@@ -22,10 +23,15 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(true);
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+
+        session.setAttribute("username", username);
+        session.setAttribute("password", password);
+        session.setAttribute("email", email);
 
         Users user = Users.builder()
                 .username(username)
@@ -34,7 +40,7 @@ public class RegistrationServlet extends HttpServlet {
                 .build();
 
         userDao.addUser(user);
-        response.sendRedirect("login.jsp");
+        req.getRequestDispatcher("sign_in.jsp").forward(req, resp);
     }
 
 }

@@ -28,7 +28,7 @@ public class UserDaoImplement implements UserDAO {
     }
 
     @Override
-    public Users getUserById(int userId) {
+    public Users getUserById(long userId) {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
             return session.get(Users.class, userId);
         }
@@ -53,7 +53,7 @@ public class UserDaoImplement implements UserDAO {
     }
 
     @Override
-    public void deleteUser(int userId) {
+    public void deleteUser(long userId) {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             Users user = session.get(Users.class, userId);

@@ -51,7 +51,7 @@ public class TodoDaoImplement implements TodoDAO {
     @Override
     public Todo getTodoById(long todoId) {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
-            return session.get(Todo.class, todoId);
+            return session.load(Todo.class, todoId);
         }
     }
 }

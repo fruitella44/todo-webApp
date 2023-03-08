@@ -5,7 +5,7 @@
   Time: 22:47
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -33,9 +33,10 @@
         <%--@declare id="email"--%>
      <label for="email">Email:</label>
      <input type="email" name="email" required><br>
-
     <button type="submit">Register</button>
 </form>
+
+<p>I already have an account <a href="sign_in.jsp">Login</a></p>
 </body>
 
 </html>

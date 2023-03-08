@@ -5,7 +5,7 @@
   Time: 15:05
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
@@ -16,8 +16,9 @@
     <title>Login Page</title>
 </head>
 <body>
+
 <h2>Todo Application</h2>
-<form method="post" action="login">
+<form action="sign_in" method="post">
     <label for="username">Имя пользователя:</label>
     <input type="text" id="username" name="username" required><br>
 
@@ -26,8 +27,10 @@
     <input type="submit" value="Login">
 
     <div class="alert alert-login center" role="alert">
-        <p>${Notification}</p>
+        <p style="color:red;">${Notification}</p>
     </div>
 </form>
+
+<p>I don't have an account <a href="sign_up.jsp"> Create new account</a></p>
 </body>
 </html>
