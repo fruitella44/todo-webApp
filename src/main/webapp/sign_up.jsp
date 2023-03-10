@@ -15,47 +15,45 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<body style="background-image: url('https://i.imgur.com/8VDQRPg.jpg')">
+<body>
 <jsp:include page="common/header.jsp" />
 
-<div class="position-relative">
-    <div class="position-absolute top-20 start-50 translate-middle-x">
-        <div class="container col-md-12 col-md-offset-3" style="overflow: auto">
-            <h2 class="text-dark">New account</h2>
+<div class="position-absolute top-20 start-50 translate-middle-x">
+    <div class="container col-md-12 col-md-offset-3" style="overflow: auto">
+        <h2 class="text-dark">New account</h2>
 
-            <form action="sign_up" method="post">
-                <div class="form-group">
-                    <label for="username" class="text-dark">Username</label>
-                    <input type="text" class="form-control middle-input" id="username" placeholder="Login" name="username" required><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="password" class="text-dark">Password</label>
-                    <input type="password" class="form-control middle-input" id="password" placeholder="Password" name="password" required><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirmPassword" class="text-dark">Confirm password</label>
-                    <input type="password" class="form-control middle-input" id="confirmPassword" placeholder="Password" name="confirmPassword" required><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="email" class="text-dark">Email</label>
-                    <input type="email" class="form-control middle-input" id="email" placeholder="Email" name="email" required><br>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </form>
-
-            <div class="link-on-page">
-                <h6 class="text-dark">I already have an account
-                    <a href="sign_in.jsp">Login</a>
-                </h6>
+        <form action="sign_up" method="post">
+            <div class="form-group">
+                <label for="username" class="text-dark">Username</label>
+                <input type="text" class="form-control middle-input" id="username" placeholder="Login" name="username" required><br>
             </div>
 
+            <div class="form-group">
+                <label for="password" class="text-dark">Password</label>
+                <input type="password" class="form-control middle-input" id="password" placeholder="Password" name="password" required><br>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword" class="text-dark">Confirm password</label>
+                <input type="password" class="form-control middle-input" id="confirmPassword" placeholder="Password" name="confirmPassword" required><br>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="text-dark">Email</label>
+                <input type="email" class="form-control middle-input" id="email" placeholder="Email" name="email" required><br>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+
+        <div class="link-on-page">
+            <h6 class="text-dark">I already have an account
+                <a href="sign_in.jsp">Login</a>
+            </h6>
         </div>
+
     </div>
 </div>
 

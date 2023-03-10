@@ -15,9 +15,9 @@
 <div class="footer">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2023 Made by:
-        <a class="text-white" href="https://mdbootstrap.com/">fruitella</a>
+        <a class="text-warning" href="https://github.com/fruitella44">fruitella</a>
     </div>
-</div>>
+</div>
 
 </body>
 </html>

@@ -16,39 +16,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<body style="background-image: url('https://i.imgur.com/8VDQRPg.jpg')">
+<body>
 <jsp:include page="common/header.jsp" />
 
-<div class="position-relative">
-    <div class="position-absolute top-0 start-50 translate-middle-x">
-        <div class="container col-md-8 col-md-offset-3" style="overflow: auto">
-            <h2 class="text-dark">Login Form</h2>
+<div class="position-absolute top-0 start-50 translate-middle-x">
+    <div class="container col-md-8 col-md-offset-3" style="overflow: auto">
+        <h2 class="text-dark">Login form</h2>
 
-            <form action="sign_in" method="post">
-                <div class="form-group">
-                    <label for="username" class="text-dark">Login</label>
-                    <input type="text" class="form-control small-input" id="username" placeholder="Login" name="username" required><br>
-                </div>
-
-                <div class="form-group">
-                    <label for="password" class="text-dark">Password</label>
-                    <input type="password" class="form-control small-input" id="password" placeholder="Password" name="password" required><br>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-
-                <div class="alert alert-login center" role="alert">
-                    <p style="color:red;">${Notification}</p>
-                </div>
-            </form>
-
-            <div class="link-on-page">
-                <h6 class="text-dark">I don't have an account yet
-                    <a href="sign_up.jsp">Create new account</a>
-                </h6>
+        <form action="sign_in" method="post">
+            <div class="form-group">
+                <label for="username" class="text-dark">Username</label>
+                <input type="text" class="form-control small-input" id="username" placeholder="Login" name="username" required><br>
             </div>
+
+            <div class="form-group">
+                <label for="password" class="text-dark">Password</label>
+                <input type="password" class="form-control small-input" id="password" placeholder="Password" name="password" required><br>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+
+            <div class="alert alert-login center" role="alert">
+                <p style="color:red;">${Notification}</p>
+            </div>
+        </form>
+
+        <div class="link-on-page">
+            <h6 class="text-dark">I don't have an account yet
+                <a href="sign_up.jsp">Create new account</a>
+            </h6>
         </div>
     </div>
 </div>
