@@ -12,30 +12,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Login Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login Page</title>
+    <link href="/css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
-<body style="background-image: url('https://i.imgur.com/COn7cPJ.jpeg')">
 
-<h2>Todo Application</h2>
-<form action="sign_in" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br>
+<body style="background-image: url('https://i.imgur.com/8VDQRPg.jpg')">
+<jsp:include page="common/header.jsp" />
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br>
-    <input type="submit" value="Submit">
+<div class="position-relative">
+    <div class="position-absolute top-0 start-50 translate-middle-x">
+        <div class="container col-md-8 col-md-offset-3" style="overflow: auto">
+            <h2 class="text-dark">Login Form</h2>
 
-    <div class="alert alert-login center" role="alert">
-        <p style="color:red;">${Notification}</p>
+            <form action="sign_in" method="post">
+                <div class="form-group">
+                    <label for="username" class="text-dark">Login</label>
+                    <input type="text" class="form-control small-input" id="username" placeholder="Login" name="username" required><br>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="text-dark">Password</label>
+                    <input type="password" class="form-control small-input" id="password" placeholder="Password" name="password" required><br>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+
+                <div class="alert alert-login center" role="alert">
+                    <p style="color:red;">${Notification}</p>
+                </div>
+            </form>
+
+            <div class="link-on-page">
+                <h6 class="text-dark">I don't have an account yet
+                    <a href="sign_up.jsp">Create new account</a>
+                </h6>
+            </div>
+        </div>
     </div>
-</form>
+</div>
 
-<p>I don't have an account <a href="sign_up.jsp"> Create new account</a></p>
+<jsp:include page="common/footer.jsp" />
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
