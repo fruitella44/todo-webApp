@@ -7,6 +7,7 @@
 <%--&ndash;%&gt;--%>
 <%@ page import="com.fruitella.todo.entity.Todo" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -24,8 +25,9 @@
   <tr>
     <th>Title</th>
     <th>Description</th>
-    <th>Is Done</th>
+    <th>Complete</th>
     <th>Expired Date</th>
+    <th>Action</th>
   </tr>
 
   <% for (Todo todo : todos) { %>
@@ -33,11 +35,16 @@
     <td><%= todo.getTitle() %></td>
     <td><%= todo.getDescription() %></td>
     <td><%= todo.getIsDone() %></td>
-    <td><%= todo.getExpiredDate() %></td>
+    <td><%= todo.getExpiredDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) %></td>
     <td>
-      <form action="delete_todo" method="post">
+      <form action="new_form" method="post">
         <input type="hidden" name="id" value="<%= todo.getId() %>">
         <button type="submit">Delete</button>
+      </form>
+
+      <form action="edit_todo" method="get">
+        <input type="hidden" name="id" value="<%= todo.getId() %>">
+        <button type="submit">Edit</button>
       </form>
     </td>
   </tr>
@@ -47,7 +54,7 @@
 <p>Todo is empty</p>
 <% } %>
 
-<form action="new_todo" method="post" >
+<form action="todo_list" method="post" >
   <input type="text" name="title" placeholder="Title">
   <input type="text" name="description" placeholder="Description">
   <input type="checkbox" name="status" value="true">Is Done

@@ -39,7 +39,6 @@ public class Todo {
     private LocalDate createdDate;
 
     @Column(name = "expired_date")
-    @UpdateTimestamp
     private LocalDate expiredDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

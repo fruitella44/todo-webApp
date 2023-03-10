@@ -1,4 +1,4 @@
-package com.fruitella.todo.servlet;
+package com.fruitella.todo.controller;
 
 import com.fruitella.todo.DAO.UserDaoImplement;
 import com.fruitella.todo.entity.Users;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "RegistrationServlet", value = "/sign_up")
-public class RegistrationServlet extends HttpServlet {
+@WebServlet(name = "RegistrationController", value = "/sign_up")
+public class RegistrationController extends HttpServlet {
 
     private UserDaoImplement userDao;
 
