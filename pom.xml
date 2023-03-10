@@ -20,6 +20,7 @@
         <javax.servlet.version>4.0.1</javax.servlet.version>
         <jstl.version>1.2</jstl.version>
         <p6spy.version>3.9.1</p6spy.version>
+        <jbcrypt.version>0.4</jbcrypt.version>
 
     </properties>
 
@@ -57,7 +58,13 @@
         <dependency>
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>
-            <version>3.9.1</version>
+            <version>${p6spy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>${jbcrypt.version}</version>
         </dependency>
     </dependencies>
 
