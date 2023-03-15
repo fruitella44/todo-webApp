@@ -15,8 +15,7 @@ public class UserDaoImplement implements UserDAO {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
             Query<Users> query = session.createQuery("FROM Users WHERE username = :USERNAME", Users.class);
             query.setParameter("USERNAME", username);
-            Users user = query.uniqueResult();
-            return user;
+            return query.uniqueResult();
         }
     }
 

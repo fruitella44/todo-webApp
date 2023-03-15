@@ -25,7 +25,6 @@ public class LoginController extends HttpServlet {
         todoDao = new TodoDaoImplement();
     }
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(true);
@@ -37,7 +36,6 @@ public class LoginController extends HttpServlet {
         AuthorisationBean userBean = new AuthorisationBean();
         userBean.setUsername(username);
         userBean.setPassword(password);
-
 
         if (loginDao.validate(userBean.getUsername(), userBean.getPassword())) {
             List<Todo> todos = todoDao.getAllTodos();

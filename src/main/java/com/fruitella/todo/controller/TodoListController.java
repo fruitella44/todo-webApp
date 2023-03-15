@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet(name = "TodoListController", value = "/todo_list")
+@WebServlet(name = "TodoListController", value = "/todo_lists")
 public class TodoListController extends HttpServlet {
     private TodoDaoImplement todoDao;
     private UserDaoImplement userDao;
@@ -32,13 +32,12 @@ public class TodoListController extends HttpServlet {
 
         if (username != null) {
             List<Todo> todoList = todoDao.getAllTodos();
-            req.setAttribute("todoList", todoList);
+            req.setAttribute("todos", todoList);
             req.getRequestDispatcher("/todo_list.jsp").forward(req, resp);
         } else {
             resp.sendRedirect( "login.jsp");
         }
     }
-
 
 
     @Override
@@ -47,7 +46,7 @@ public class TodoListController extends HttpServlet {
         String username = (String) session.getAttribute("username");
         String title = req.getParameter("title");
         String description = req.getParameter("description");
-        boolean status = Boolean.valueOf(req.getParameter("isDone"));
+        boolean status = Boolean.parseBoolean(req.getParameter("isDone"));
         LocalDate expiredDate = LocalDate.parse(req.getParameter("expiredDate"));
 
         Users user = userDao.getUserByUsername(username);

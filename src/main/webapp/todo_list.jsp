@@ -80,6 +80,25 @@
       </table>
     </div>
 
+    <div class="pagination">
+      <c:if test="${currentPage > 1}">
+        <a href="?page=${currentPage-1}">Previous</a>
+      </c:if>
+      <c:forEach var="i" begin="1" end="${noOfPages}">
+        <c:choose>
+          <c:when test="${i == currentPage}">
+            <span>${i}</span>
+          </c:when>
+          <c:otherwise>
+            <a href="?page=${i}">${i}</a>
+          </c:otherwise>
+        </c:choose>
+      </c:forEach>
+      <c:if test="${currentPage < noOfPages}">
+        <a href="?page=${currentPage+1}">Next</a>
+      </c:if>
+    </div>
+
   </div>
 </div>
 

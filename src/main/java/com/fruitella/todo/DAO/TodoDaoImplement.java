@@ -13,8 +13,12 @@ public class TodoDaoImplement implements TodoDAO {
     @Override
     public List<Todo> getAllTodos() {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
-            Query<Todo> todoQuery = session.createQuery("FROM Todo", Todo.class);
-            return todoQuery.getResultList();
+            Transaction transaction = session.beginTransaction();
+            Query<Todo> todoQuery = session.createQuery("FROM Todo t ORDER BY t.id", Todo.class);
+            List<Todo> todoList = todoQuery.getResultList();
+            transaction.commit();
+            return todoList;
+
         }
     }
 
@@ -57,4 +61,5 @@ public class TodoDaoImplement implements TodoDAO {
             return todo;
         }
     }
+
 }
