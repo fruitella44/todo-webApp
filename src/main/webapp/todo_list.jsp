@@ -44,7 +44,7 @@
           <th scope="col">Task</th>
           <th scope="col">Title</th>
           <th scope="col">Description</th>
-          <th scope="col">Complete</th>
+          <th scope="col">Status</th>
           <th scope="col">Deadline</th>
           <th scope="col">Action</th>
         </tr>
@@ -57,7 +57,7 @@
           <td class="table-info"><%= todo.getId()%></td>
           <td class="table-info"><%= todo.getTitle() %></td>
           <td class="table-info"><%= todo.getDescription() %></td>
-          <td class="table-info"><%= todo.getIsDone() %></td>
+          <td class="table-info"><% if (todo.getIsDone()) { %> Complete <% } else { %> In progress <% } %></td>
           <td class="table-info"><%= todo.getExpiredDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) %></td>
           <td class="table-info">
             <div class="btn-group">
@@ -79,26 +79,6 @@
         </tbody>
       </table>
     </div>
-
-    <div class="pagination">
-      <c:if test="${currentPage > 1}">
-        <a href="?page=${currentPage-1}">Previous</a>
-      </c:if>
-      <c:forEach var="i" begin="1" end="${noOfPages}">
-        <c:choose>
-          <c:when test="${i == currentPage}">
-            <span>${i}</span>
-          </c:when>
-          <c:otherwise>
-            <a href="?page=${i}">${i}</a>
-          </c:otherwise>
-        </c:choose>
-      </c:forEach>
-      <c:if test="${currentPage < noOfPages}">
-        <a href="?page=${currentPage+1}">Next</a>
-      </c:if>
-    </div>
-
   </div>
 </div>
 

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet(name = "TodoListController", value = "/todo_lists")
+@WebServlet(name = "TodoListController", value = "/todo_list")
 public class TodoListController extends HttpServlet {
     private TodoDaoImplement todoDao;
     private UserDaoImplement userDao;
@@ -35,7 +35,7 @@ public class TodoListController extends HttpServlet {
             req.setAttribute("todos", todoList);
             req.getRequestDispatcher("/todo_list.jsp").forward(req, resp);
         } else {
-            resp.sendRedirect( "login.jsp");
+            resp.sendRedirect( "sign_in.jsp");
         }
     }
 
