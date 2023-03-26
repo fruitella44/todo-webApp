@@ -4,6 +4,8 @@ import com.fruitella.todo.DAO.LoginUserDao;
 import com.fruitella.todo.DAO.TodoDaoImplement;
 import com.fruitella.todo.bean.AuthorisationBean;
 import com.fruitella.todo.entity.Todo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "LoginController", value = "/sign_in")
 public class LoginController extends HttpServlet {
-
+    private static final Logger LOGGER = LogManager.getLogger(LoginController.class);
     private LoginUserDao loginDao;
     private TodoDaoImplement todoDao;
 
@@ -36,14 +38,18 @@ public class LoginController extends HttpServlet {
         AuthorisationBean userBean = new AuthorisationBean();
         userBean.setUsername(username);
         userBean.setPassword(password);
+        LOGGER.debug("Set username + password to AuthorisationBean");
 
         if (loginDao.validate(userBean.getUsername(), userBean.getPassword())) {
+            LOGGER.debug("User: " + username + " authorized successfully");
+
             List<Todo> todos = todoDao.getAllTodos();
             session.setAttribute("todos", todos);
             resp.sendRedirect("todo_list.jsp");
         } else {
             req.setAttribute("Notification", "Invalid login or password");
             req.getRequestDispatcher("sign_in.jsp").forward(req, resp);
+            LOGGER.debug("Invalid login or password. Send redirect to login page");
         }
     }
 }

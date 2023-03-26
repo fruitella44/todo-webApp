@@ -118,6 +118,10 @@
     <div class="label-spacing">
       <button type="submit" class="btn btn-success">Submit</button>
     </div>
+
+    <div class="alert alert-login center" role="alert">
+      <p style="color:#3cc31c;">${Notification}</p>
+    </div>
   </form>
 </div>
 

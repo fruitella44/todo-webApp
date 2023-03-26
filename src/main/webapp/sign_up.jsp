@@ -46,6 +46,10 @@
                 <input type="email" class="form-control middle-input" id="email" placeholder="Email" name="email" required><br>
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
+
+            <div class="alert alert-login center" role="alert">
+                <p style="color:#3cc31c;">${Notification}</p>
+            </div>
         </form>
 
         <div class="link-on-page">

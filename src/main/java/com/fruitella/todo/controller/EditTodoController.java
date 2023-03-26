@@ -4,6 +4,8 @@ import com.fruitella.todo.DAO.TodoDaoImplement;
 import com.fruitella.todo.DAO.UserDaoImplement;
 import com.fruitella.todo.entity.Todo;
 import com.fruitella.todo.entity.Users;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +18,7 @@ import java.time.LocalDate;
 
 @WebServlet(name = "EditTodoController", value = "/edit_todo")
 public class EditTodoController extends HttpServlet {
-
+    private static final Logger LOGGER = LogManager.getLogger(EditTodoController.class);
     private TodoDaoImplement todoDao;
     private UserDaoImplement userDao;
 
@@ -30,9 +32,12 @@ public class EditTodoController extends HttpServlet {
         HttpSession session = req.getSession(true);
         long id = Long.parseLong(req.getParameter("id"));
         Todo todo = todoDao.getTodoById(id);
+        LOGGER.debug("Found task with id: " + id);
+
         req.setAttribute("todo", todo);
         session.setAttribute("todos", todoDao.getAllTodos());
         req.getRequestDispatcher("/edit_todo.jsp").forward(req, resp);
+        LOGGER.debug("Send redirect to edit_todo page");
     }
 
 
@@ -47,6 +52,7 @@ public class EditTodoController extends HttpServlet {
         LocalDate expiredDate = LocalDate.parse(req.getParameter("expiredDate"));
 
         Users user = userDao.getUserByUsername(username);
+        LOGGER.debug("User with " + username + " is changing existed task");
 
         Todo todo = Todo.builder()
                 .id(id)
@@ -57,8 +63,10 @@ public class EditTodoController extends HttpServlet {
                 .expiredDate(expiredDate)
                 .build();
         todoDao.updateTodo(todo);
+        LOGGER.debug("Commit action - [Update task] with id: " + id);
 
         session.setAttribute("todos", todoDao.getAllTodos());
         resp.sendRedirect("todo_list.jsp");
+        LOGGER.debug("Send redirect with updated form");
     }
 }

@@ -23,7 +23,7 @@
         <jbcrypt.version>0.4</jbcrypt.version>
         <war.version>3.3.2</war.version>
         <surefire.version>2.12.4</surefire.version>
-
+        <logging.version>2.20.0</logging.version>
     </properties>
 
     <dependencies>
@@ -67,6 +67,12 @@
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>${jbcrypt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${logging.version}</version>
         </dependency>
     </dependencies>
 
