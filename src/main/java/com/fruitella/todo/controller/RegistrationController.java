@@ -3,6 +3,7 @@ package com.fruitella.todo.controller;
 import com.fruitella.todo.DAO.UserDaoImplement;
 import com.fruitella.todo.entity.Users;
 import com.fruitella.todo.hasher.PasswordHasher;
+import com.fruitella.todo.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,11 +19,11 @@ import javax.servlet.http.HttpSession;
 public class RegistrationController extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(RegistrationController.class);
 
-    private UserDaoImplement userDao;
+    private UserService userService;
 
     @Override
     public void init() {
-        userDao = new UserDaoImplement();
+        userService = new UserService();
     }
 
     @Override
@@ -42,7 +43,7 @@ public class RegistrationController extends HttpServlet {
                 .userPassword(PasswordHasher.hashPassword(password))
                 .email(email)
                 .build();
-        userDao.addUser(user);
+        userService.addUser(user);
 
         req.setAttribute("Notification", "Registration successful");
         req.getRequestDispatcher("sign_in.jsp").forward(req, resp);

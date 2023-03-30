@@ -4,6 +4,7 @@ import com.fruitella.todo.DAO.LoginUserDao;
 import com.fruitella.todo.DAO.TodoDaoImplement;
 import com.fruitella.todo.bean.AuthorisationBean;
 import com.fruitella.todo.entity.Todo;
+import com.fruitella.todo.service.TodoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,11 +21,11 @@ import javax.servlet.http.HttpSession;
 public class LoginController extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(LoginController.class);
     private LoginUserDao loginDao;
-    private TodoDaoImplement todoDao;
+    private TodoService todoService;
 
     public void init() {
         loginDao = new LoginUserDao();
-        todoDao = new TodoDaoImplement();
+        todoService = new TodoService();
     }
 
     @Override
@@ -43,7 +44,7 @@ public class LoginController extends HttpServlet {
         if (loginDao.validate(userBean.getUsername(), userBean.getPassword())) {
             LOGGER.debug("User: " + username + " authorized successfully");
 
-            List<Todo> todos = todoDao.getAllTodos();
+            List<Todo> todos = todoService.getAllTodos(username);
             session.setAttribute("todos", todos);
             resp.sendRedirect("todo_list.jsp");
         } else {
