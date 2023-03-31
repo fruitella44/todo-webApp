@@ -39,7 +39,7 @@
             </div>
 
             <div class="alert alert-login center" role="alert">
-                <p style="color:red;">${Notification}</p>
+                <p style="color: red">${Notification}</p>
             </div>
         </form>
 

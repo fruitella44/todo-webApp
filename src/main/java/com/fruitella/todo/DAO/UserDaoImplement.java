@@ -2,6 +2,7 @@ package com.fruitella.todo.DAO;
 
 import com.fruitella.todo.connection.TodoAppSessionFactory;
 import com.fruitella.todo.entity.Users;
+import com.fruitella.todo.query.Queries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -16,7 +17,7 @@ public class UserDaoImplement implements UserDAO {
     @Override
     public Users getUserByUsername(String username) {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
-            Query<Users> query = session.createQuery("FROM Users WHERE username = :USERNAME", Users.class);
+            Query<Users> query = session.createQuery(Queries.getFindUserByUsername(), Users.class);
             query.setParameter("USERNAME", username);
 
             LOGGER.debug("Select user by username: " + username);

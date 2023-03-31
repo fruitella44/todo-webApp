@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fruitella.todo.connection.TodoAppSessionFactory;
 import com.fruitella.todo.entity.Todo;
+import com.fruitella.todo.query.Queries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -14,10 +15,11 @@ public class TodoDaoImplement implements TodoDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(TodoDaoImplement.class);
     @Override
-    public List<Todo> getAllTodos() {
+    public List<Todo> getAllTodos(String username) {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            Query<Todo> todoQuery = session.createQuery("FROM Todo t ORDER BY t.id", Todo.class);
+            Query<Todo> todoQuery = session.createQuery(Queries.getGetAllTodoByUser(), Todo.class);
+            todoQuery.setParameter("USERNAME", username);
             List<Todo> todoList = todoQuery.getResultList();
             transaction.commit();
 

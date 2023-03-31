@@ -22,7 +22,7 @@
 <jsp:include page="common/header.jsp" />
 
 <div class="position-absolute top-20 start-50 translate-middle-x">
-    <div class="container col-md-12 col-md-offset-3" style="overflow: auto">
+    <div class="container col-md-12 col-md-offset-3">
         <h2 class="text-dark">New account</h2>
 
         <form action="sign_up" method="post">
@@ -48,7 +48,7 @@
             </div>
 
             <div class="alert alert-login center" role="alert">
-                <p style="color:#3cc31c;">${Notification}</p>
+                <p style="color: red">${Notification}</p>
             </div>
         </form>
 

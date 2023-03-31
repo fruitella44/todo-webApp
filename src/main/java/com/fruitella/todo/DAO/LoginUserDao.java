@@ -3,6 +3,7 @@ package com.fruitella.todo.DAO;
 import com.fruitella.todo.connection.TodoAppSessionFactory;
 import com.fruitella.todo.entity.Users;
 import com.fruitella.todo.hasher.PasswordHasher;
+import com.fruitella.todo.query.Queries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -17,8 +18,8 @@ public class LoginUserDao {
     public boolean validate(String name, String password) {
         try (Session session = TodoAppSessionFactory.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            Query<Users> userQuery = session.createQuery("FROM Users WHERE username = :NAME");
-            userQuery.setParameter("NAME", name);
+            Query<Users> userQuery = session.createQuery(Queries.getFindUserByUsername(), Users.class);
+            userQuery.setParameter("USERNAME", name);
             LOGGER.debug("Select user from table users. Found: " + name);
 
             Users user = userQuery.getSingleResult();

@@ -5,7 +5,7 @@ import com.fruitella.todo.entity.Todo;
 import java.util.List;
 
 public interface TodoDAO {
-    List<Todo> getAllTodos();
+    List<Todo> getAllTodos(String username);
     void addTodo(Todo todo);
     void updateTodo(Todo todo);
     void deleteTodoById(long id);

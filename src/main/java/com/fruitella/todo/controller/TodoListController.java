@@ -1,9 +1,10 @@
 package com.fruitella.todo.controller;
 
-import com.fruitella.todo.DAO.TodoDaoImplement;
-import com.fruitella.todo.DAO.UserDaoImplement;
+
 import com.fruitella.todo.entity.Todo;
 import com.fruitella.todo.entity.Users;
+import com.fruitella.todo.service.TodoService;
+import com.fruitella.todo.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,12 +21,13 @@ import java.util.List;
 @WebServlet(name = "TodoListController", value = "/todo_list")
 public class TodoListController extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(TodoListController.class);
-    private TodoDaoImplement todoDao;
-    private UserDaoImplement userDao;
+
+    private UserService userService;
+    private TodoService todoService;
 
     public void init() {
-        todoDao = new TodoDaoImplement();
-        userDao = new UserDaoImplement();
+        userService = new UserService();
+        todoService = new TodoService();
     }
 
     @Override
@@ -35,12 +37,12 @@ public class TodoListController extends HttpServlet {
         LOGGER.debug("Session active for user: " + username);
 
         if (username != null) {
-            List<Todo> todoList = todoDao.getAllTodos();
+            List<Todo> todoList = todoService.getAllTodos(username);
             req.setAttribute("todos", todoList);
-            req.getRequestDispatcher("/todo_list.jsp").forward(req, resp);
+            req.getRequestDispatcher("todo/todo_list.jsp").forward(req, resp);
             LOGGER.debug("Get all todos with size: " + todoList.size());
         } else {
-            resp.sendRedirect( "sign_in.jsp");
+            resp.sendRedirect( "/sign_in.jsp");
             LOGGER.debug("User = null. Send redirect to login page" );
         }
     }
@@ -55,7 +57,7 @@ public class TodoListController extends HttpServlet {
         boolean status = Boolean.parseBoolean(req.getParameter("isDone"));
         LocalDate expiredDate = LocalDate.parse(req.getParameter("expiredDate"));
 
-        Users user = userDao.getUserByUsername(username);
+        Users user = userService.getUserByUsername(username);
         LOGGER.debug("User with " + username + " is adding new task");
 
         Todo todo = Todo.builder()
@@ -65,14 +67,14 @@ public class TodoListController extends HttpServlet {
                 .isDone(status)
                 .expiredDate(expiredDate)
                 .build();
-        todoDao.addTodo(todo);
+        todoService.addTodo(todo);
         LOGGER.debug("Commit action - [Insert new task] with id: " + todo.getId());
 
-        List<Todo> todos = todoDao.getAllTodos();
+        List<Todo> todos = todoService.getAllTodos(username);
         session.setAttribute("todos", todos);
 
         req.setAttribute("Notification", "Todo added successfully");
-        req.getRequestDispatcher("todo_list.jsp").forward(req, resp);
+        req.getRequestDispatcher("/todo_list.jsp").forward(req, resp);
         LOGGER.debug("Task added successfully. Redirect to the same page. Show updated form");
     }
 
