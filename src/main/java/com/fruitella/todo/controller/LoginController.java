@@ -1,7 +1,6 @@
 package com.fruitella.todo.controller;
 
 import com.fruitella.todo.DAO.LoginUserDao;
-import com.fruitella.todo.DAO.TodoDaoImplement;
 import com.fruitella.todo.bean.AuthorisationBean;
 import com.fruitella.todo.entity.Todo;
 import com.fruitella.todo.service.TodoService;
@@ -46,10 +45,10 @@ public class LoginController extends HttpServlet {
 
             List<Todo> todos = todoService.getAllTodos(username);
             session.setAttribute("todos", todos);
-            resp.sendRedirect("todo_list.jsp");
+            resp.sendRedirect("/todo_list.jsp");
         } else {
             req.setAttribute("Notification", "Invalid login or password");
-            req.getRequestDispatcher("sign_in.jsp").forward(req, resp);
+            req.getRequestDispatcher("/sign_in.jsp").forward(req, resp);
             LOGGER.debug("Invalid login or password. Send redirect to login page");
         }
     }

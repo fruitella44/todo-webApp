@@ -1,6 +1,5 @@
 package com.fruitella.todo.controller;
 
-import com.fruitella.todo.DAO.UserDaoImplement;
 import com.fruitella.todo.entity.Users;
 import com.fruitella.todo.hasher.PasswordHasher;
 import com.fruitella.todo.service.UserService;
@@ -46,7 +45,7 @@ public class RegistrationController extends HttpServlet {
         userService.addUser(user);
 
         req.setAttribute("Notification", "Registration successful");
-        req.getRequestDispatcher("sign_in.jsp").forward(req, resp);
+        req.getRequestDispatcher("/sign_in.jsp").forward(req, resp);
         LOGGER.debug("Commit action: [Insert new user to table users]. Send redirect to login page");
     }
 

@@ -1,7 +1,6 @@
 package com.fruitella.todo.controller;
 
-import com.fruitella.todo.DAO.TodoDaoImplement;
-import com.fruitella.todo.DAO.UserDaoImplement;
+
 import com.fruitella.todo.entity.Todo;
 import com.fruitella.todo.entity.Users;
 import com.fruitella.todo.service.TodoService;
@@ -40,10 +39,10 @@ public class TodoListController extends HttpServlet {
         if (username != null) {
             List<Todo> todoList = todoService.getAllTodos(username);
             req.setAttribute("todos", todoList);
-            req.getRequestDispatcher("/todo_list.jsp").forward(req, resp);
+            req.getRequestDispatcher("todo/todo_list.jsp").forward(req, resp);
             LOGGER.debug("Get all todos with size: " + todoList.size());
         } else {
-            resp.sendRedirect( "sign_in.jsp");
+            resp.sendRedirect( "/sign_in.jsp");
             LOGGER.debug("User = null. Send redirect to login page" );
         }
     }
@@ -75,7 +74,7 @@ public class TodoListController extends HttpServlet {
         session.setAttribute("todos", todos);
 
         req.setAttribute("Notification", "Todo added successfully");
-        req.getRequestDispatcher("todo_list.jsp").forward(req, resp);
+        req.getRequestDispatcher("/todo_list.jsp").forward(req, resp);
         LOGGER.debug("Task added successfully. Redirect to the same page. Show updated form");
     }
 

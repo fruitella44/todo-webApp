@@ -1,7 +1,5 @@
 package com.fruitella.todo.controller;
 
-
-import com.fruitella.todo.DAO.TodoDaoImplement;
 import com.fruitella.todo.service.TodoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +30,7 @@ public class DeleteTodoController extends HttpServlet {
         LOGGER.debug("Commit action - [Delete task] with id: " + id);
 
         session.setAttribute("todos", todoService.getAllTodos(username));
-        resp.sendRedirect("todo_list.jsp");
+        resp.sendRedirect("/todo_list.jsp");
         LOGGER.debug("Send redirect with updated form");
     }
 }

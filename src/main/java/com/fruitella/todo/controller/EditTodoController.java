@@ -1,7 +1,5 @@
 package com.fruitella.todo.controller;
 
-import com.fruitella.todo.DAO.TodoDaoImplement;
-import com.fruitella.todo.DAO.UserDaoImplement;
 import com.fruitella.todo.entity.Todo;
 import com.fruitella.todo.entity.Users;
 import com.fruitella.todo.service.TodoService;
@@ -69,7 +67,7 @@ public class EditTodoController extends HttpServlet {
         LOGGER.debug("Commit action - [Update task] with id: " + id);
 
         session.setAttribute("todos", todoService.getAllTodos(username));
-        resp.sendRedirect("todo_list.jsp");
+        resp.sendRedirect("/todo_list.jsp");
         LOGGER.debug("Send redirect with updated form");
     }
 }
