@@ -14,7 +14,7 @@
 * Настроена базовая безопасность. После регистрации пароль хэшируется с помощью библиотеки BCrypt и сохраняется в виде хэша в БД.
 ------------------------------------
 * Для создания и сборки проекта использовались следующие технологии:
-  JDK-17, Maven, JavaServlets, Hibernate-5, PostgreSQL-13, Log4j2, Bootstrap-4, JSP/JSTL, Tomcat, BCrypt, Lombok.
+  JDK-17, Maven, JavaServlets, Hibernate-5, Docker, PostgreSQL-13, Log4j2, Bootstrap-4, JSP/JSTL, Tomcat, BCrypt, Lombok.
 ------------------------------------
 * Пример того как это выглядит: 
 * ![login](https://i.imgur.com/YOaeMQn.png)
